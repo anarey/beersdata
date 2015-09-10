@@ -9,16 +9,24 @@ class Ingredient(models.Model):
     )
     name = models.CharField(max_length=100, unique = True)
     type_ingredient = models.CharField(max_length=1, choices = TYPE_INGREDIENT)
-
-class Recipe(models.Model):
-    ingredient = models.ForeignKey(Ingredient)
-    quantity = models.IntegerField(default=0)
+    def __str__(self):
+        return self.name + " [" + self.type_ingredient + "]"
 
 class Beer(models.Model):
     beer_name = models.CharField(max_length=50)
     beer_code = models.CharField(max_length=4)
-    brewing_date = models.DateTimeField('Date brewing')
-    bottle_date = models.DateTimeField('Date bottled')
-    alcohol = models.IntegerField(default=0)
-    ibu = models.IntegerField(default=0)
-    recipe = models.ManyToManyField(Recipe)
+    brewing_date = models.DateField('Date brewing')
+    bottle_date = models.DateTimeField('Date bottled', blank = True, null = True)
+    alcohol = models.FloatField(default=0, blank = True, null = True)
+    ibu = models.FloatField(default=0, blank = True, null = True)
+
+    def __str__(self):
+        return self.beer_name
+
+class Recipe(models.Model):
+    ingredient = models.ForeignKey(Ingredient)
+    quantity = models.IntegerField(default = 0)
+    beer = models.ForeignKey(Beer, default = '-1')
+
+    def __str__(self):
+        return (self.ingredient.name + " " + str(self.quantity))
