@@ -16,7 +16,7 @@ class Beer(models.Model):
     beer_name = models.CharField(max_length=50)
     beer_code = models.CharField(max_length=4)
     brewing_date = models.DateField('Date brewing')
-    bottle_date = models.DateTimeField('Date bottled', blank = True, null = True)
+    bottle_date = models.DateField('Date bottled', blank = True, null = True)
     alcohol = models.FloatField(default=0, blank = True, null = True)
     ibu = models.FloatField(default=0, blank = True, null = True)
 
