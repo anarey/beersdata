@@ -16,7 +16,7 @@ class DetailView(generic.DetailView):
     model = Beer
     template_name = 'beers/detail.html'
 
-class IngredientView(generic.DetailView):
+class DetailViewIngredient(generic.DetailView):
     model = Ingredient
     template_name = 'beers/ingredient-detail.html'
 
