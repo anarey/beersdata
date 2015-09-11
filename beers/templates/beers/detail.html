@@ -1,0 +1,13 @@
+<h1>{{ beer.beer_name }}</h1>
+<h2>Información general:</h2>
+<ul>
+<li>Alcohol: {{beer.alcohol }}</li>
+<li>IBU: {{beer.ibu }} </li>
+</ul>
+
+<h2>Recipe:</h2>
+<ul>
+{% for recipe in beer.recipe_set.all %}
+    <li>{{ recipe}}</li>
+{% endfor %}
+</ul>

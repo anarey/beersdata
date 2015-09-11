@@ -1,0 +1,11 @@
+<h1>Historial de cervezas</h1>
+
+{% if beers_list %}
+    <ul>
+    {% for beer in beers_list %}
+        <li><a href="{% url 'beers:detail-beers' beer.id %}">{{ beer.beer_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No beer are available.</p>
+{% endif %}
