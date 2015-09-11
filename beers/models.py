@@ -29,4 +29,4 @@ class Recipe(models.Model):
     beer = models.ForeignKey(Beer, default = '-1')
 
     def __str__(self):
-        return (self.ingredient.name + " " + str(self.quantity))
+        return (self.ingredient.name + ": " + str(self.quantity)) + " gr"
