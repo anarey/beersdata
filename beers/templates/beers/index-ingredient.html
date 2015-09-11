@@ -1,3 +1,8 @@
+{% extends "beers/base.html" %}
+
+{% block title %}Historial de cervezas{% endblock %}
+
+{% block content %}
 <h1>Listado de ingredientes</h1>
 
 {% if ingredient_list %}
@@ -9,3 +14,5 @@
 {% else %}
     <p>No ingredients are available.</p>
 {% endif %}
+
+{% endblock %}

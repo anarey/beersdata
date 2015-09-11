@@ -1,3 +1,10 @@
+{% extends "beers/base.html" %}
+
+{% block title %} Detalles del ingrediente {{ ingredient }} {% endblock %}
+{% block content %}
+
 <h1> Detalles del ingrediente {{ingredient.name }} </h1>
 
 {{ingredient }}
+
+{% endblock %}

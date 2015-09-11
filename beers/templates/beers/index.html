@@ -1,8 +1,8 @@
-{% load staticfiles %}
+{% extends "beers/base.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'beers/style.css' %}" />
+{% block title %}Historial de cervezas{% endblock %}
 
-<h1>Historial de cervezas</h1>
+{% block content %}
 
 {% if beers_list %}
     <ul>
@@ -13,3 +13,5 @@
 {% else %}
     <p>No beer are available.</p>
 {% endif %}
+
+{% endblock %}

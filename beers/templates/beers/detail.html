@@ -1,3 +1,9 @@
+{% extends "beers/base.html" %}
+
+{% block title %} Detalles de una cerveza {% endblock %}
+
+{% block content %}
+
 <h1>{{ beer.beer_name }}</h1>
 <h2>Información general:</h2>
 <ul>
@@ -11,3 +17,5 @@
     <li>{{ recipe}}</li>
 {% endfor %}
 </ul>
+
+{% endblock %}
