@@ -8,24 +8,24 @@ from django.shortcuts import render
 from .models import Beer, Ingredient
 from .forms import BeerForm
 
-class IndexView(generic.ListView):
-    template_name = 'beers/index.html'
+class BeerIndexView(generic.ListView):
+    template_name = 'beers/beer_index.html'
     context_object_name = 'beers_list'
 
     def get_queryset(self):
         """Return the last five published beers."""
         return Beer.objects.order_by('-brewing_date')
 
-class DetailView(generic.DetailView):
+class BeerDetailView(generic.DetailView):
     model = Beer
-    template_name = 'beers/detail.html'
+    template_name = 'beers/beer_detail.html'
 
-class DetailViewIngredient(generic.DetailView):
+class IngredientDetailView(generic.DetailView):
     model = Ingredient
-    template_name = 'beers/ingredient-detail.html'
+    template_name = 'beers/ingredient_detail.html'
 
-class IndexViewIngredient(generic.ListView):
-    template_name = 'beers/index-ingredient.html'
+class IngredientIndexView(generic.ListView):
+    template_name = 'beers/ingredient_index.html'
     context_object_name = 'ingredient_list'
 
     def get_queryset(self):
@@ -41,7 +41,7 @@ def beer_new(request):
 #            beer.author = request.user
 #            import ipdb; ipdb.set_trace()
             beer.save()
-            return HttpResponseRedirect(reverse('beers:detail-beers',
+            return HttpResponseRedirect(reverse('beers:beer_detail',
                                                 args=(beer.pk,)))
     else:
         form = BeerForm()
@@ -55,7 +55,7 @@ def beer_edit(request, pk):
             beer = form.save(commit=False)
 #            beer.author = request.user
             beer.save()
-            return HttpResponseRedirect(reverse('beers:detail-beers',
+            return HttpResponseRedirect(reverse('beers:beer_detail',
                                                 args=(beer.pk,)))
     else:
         form = BeerForm(instance=beer)

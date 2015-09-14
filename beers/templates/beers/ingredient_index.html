@@ -8,7 +8,7 @@
 {% if ingredient_list %}
     <ul>
     {% for ingredient in ingredient_list %}
-        <li><a href="{% url 'beers:detail-ingredients' ingredient.id %}">{{ ingredient.name }}</a></li>
+        <li><a href="{% url 'beers:ingredient_detail' ingredient.id %}">{{ ingredient.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
