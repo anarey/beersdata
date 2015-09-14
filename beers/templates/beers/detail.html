@@ -4,7 +4,10 @@
 
 {% block content %}
 
-<h1>{{ beer.beer_name }}</h1>
+
+<h1>{{ beer.beer_name }}
+<a class="btn btn-default" href="{% url "beers:beer_edit" pk=beer.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+</h1>
 <h2>Información general:</h2>
 <ul>
 <li>Alcohol: {{beer.alcohol }}</li>

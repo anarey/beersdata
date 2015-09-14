@@ -4,9 +4,6 @@
 
 {% block content %}
 
-<h1>Historial de cervezas.
- <a href="{% url 'beers:beer_new' %}" class="top-menu"> [add beer]</a>
-</h1>
 {% if beers_list %}
     <ul>
     {% for beer in beers_list %}
