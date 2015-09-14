@@ -12,3 +12,12 @@ li a {
     color: green;
 }
 
+.page-header {
+    background-color: #14a82a;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header a {
+    color: white;
+}
