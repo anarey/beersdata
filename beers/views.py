@@ -1,10 +1,9 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404
 
 from django.views import generic
 from django.shortcuts import render
-from django.template import RequestContext
 
 from .models import Beer, Ingredient, Recipe
 from .forms import BeerForm, RecipeForm
@@ -50,7 +49,6 @@ def beer_new(request):
         form = BeerForm(request.POST)
         if form.is_valid():
             beer = form.save()
-            beer.save()
             return HttpResponseRedirect(reverse('beers:beer_detail',
                                                 args=(beer.pk,)))
     else:
@@ -84,9 +82,7 @@ def recipe_new(request, pk):
                                                 args=(recipe.pk,)))
     else:
         form = RecipeForm()
-    return render_to_response('beers/recipe_edit.html',
-                              {'form': form},
-                              context_instance=RequestContext(request))
+    return render(request, 'beers/recipe_edit.html', {'form': form})
 
 
 def recipe_edit(request, pk):
