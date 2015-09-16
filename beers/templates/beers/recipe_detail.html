@@ -1,10 +1,14 @@
 {% extends "beers/base.html" %}
 
-{% block title %} Detalles de la cantidad de ingrediente de {{ recipe }} {% endblock %}
+{% block title %} Información del ingrediente de {{ recipe.ingrediente }} {% endblock %}
 {% block content %}
 
-<h1> Detalles de la candidad de ingrediente de la receta {{recipe}} </h1>
-
-{{ recipe.more_info }}
+<h1> Información específica del ingrediente {{recipe.ingredient }} de la cerveza {{ recipe.beer }}</h1>
+<ul>
+<li>Ingrediente: {{ recipe.ingredient }}</li>
+<li>Tipo: {{ recipe.ingredient.type_ingredient }}
+<li>Cantidad: {{ recipe.quantity }} </li>
+<li>Más info sobre el ingrediente: (próximamente)</li>
+</ul>
 
 {% endblock %}
