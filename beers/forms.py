@@ -1,5 +1,5 @@
 from django import forms
-from .models import Beer, Recipe
+from .models import Beer, Recipe, Ingredient
 
 class BeerForm(forms.ModelForm):
 
@@ -12,3 +12,9 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ('ingredient', 'quantity')
+
+class IngredientForm(forms.ModelForm):
+
+    class Meta:
+        model = Ingredient
+        fields = '__all__'

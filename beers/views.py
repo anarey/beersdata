@@ -6,7 +6,7 @@ from django.views import generic
 from django.shortcuts import render
 
 from .models import Beer, Ingredient, Recipe
-from .forms import BeerForm, RecipeForm
+from .forms import BeerForm, RecipeForm, IngredientForm
 
 class BeerIndexView(generic.ListView):
     template_name = 'beers/beer_index.html'
@@ -96,3 +96,41 @@ def recipe_edit(request, pk):
     else:
         form = RecipeForm(instance=recipe)
     return render(request, 'beers/recipe_edit.html', {'form': form})
+
+
+def ingredient_edit(request, pk):
+    beer = get_object_or_404(Beer, pk=pk)
+    if request.method == "POST":
+        form = BeerForm(request.POST, instance=beer)
+        if form.is_valid():
+            beer = form.save()
+            return HttpResponseRedirect(reverse('beers:beer_detail',
+                                                args=(beer.pk)))
+    else:
+        form = BeerForm(instance=beer)
+    return render(request, 'beers/beer_edit.html', {'form': form})
+
+
+def ingredient_new(request):
+    if request.method == "POST":
+        form = IngredientForm(request.POST)
+        if form.is_valid():
+            ingredient = form.save()
+            return HttpResponseRedirect(reverse('beers:ingredient_detail',
+                                                args=(ingredient.pk,)))
+    else:
+        form = IngredientForm()
+    return render(request, 'beers/ingredient_edit.html', {'form': form})
+
+
+def ingredient_edit(request, pk):
+    ingredient = get_object_or_404(Ingredient, pk=pk)
+    if request.method == "POST":
+        form = IngredientForm(request.POST, instance=ingredient)
+        if form.is_valid():
+            ingredient = form.save()
+            return HttpResponseRedirect(reverse('beers:ingredient_detail',
+                                                args=(ingredient.pk,)))
+    else:
+        form = IngredientForm(instance=ingredient)
+    return render(request, 'beers/ingredient_edit.html', {'form': form})
