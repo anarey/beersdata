@@ -1,0 +1,10 @@
+{% extends "beers/base.html" %}
+
+{% block content %}
+    <h1>Nuevo ingrediente para la receta. </h1>
+    <form method="POST" class="beer-form">{% csrf_token %}
+        {{ form.ingredient }}
+        {{ form.quantity }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "beers/base.html" %}
+
+{% block title %} Detalles de la cantidad de ingrediente de {{ recipe }} {% endblock %}
+{% block content %}
+
+<h1> Detalles de la candidad de ingrediente de la receta {{recipe}} </h1>
+
+{{ recipe.more_info }}
+
+{% endblock %}

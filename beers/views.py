@@ -1,12 +1,13 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, get_list_or_404, get_object_or_404
+from django.shortcuts import get_object_or_404, render_to_response
 
 from django.views import generic
 from django.shortcuts import render
+from django.template import RequestContext
 
-from .models import Beer, Ingredient
-from .forms import BeerForm
+from .models import Beer, Ingredient, Recipe
+from .forms import BeerForm, RecipeForm
 
 class BeerIndexView(generic.ListView):
     template_name = 'beers/beer_index.html'
@@ -32,14 +33,23 @@ class IngredientIndexView(generic.ListView):
         """Return all Ingredient."""
         return Ingredient.objects.order_by('-type_ingredient').order_by('name')
 
+class RecipeDetailView(generic.DetailView):
+    model = Recipe
+    template_name = 'beers/recipe_detail.html'
+
+class RecipeIndexView(generic.ListView):
+    template_name = 'beers/recipe_index.html'
+    context_object_name = 'recipe_list'
+
+    def get_queryset(self):
+        """Return all Ingredient."""
+        return Recipe.objects.order_by('-beer')
+
 def beer_new(request):
     if request.method == "POST":
         form = BeerForm(request.POST)
         if form.is_valid():
             beer = form.save()
-#            beer = form.save(commit=False)
-#            beer.author = request.user
-#            import ipdb; ipdb.set_trace()
             beer.save()
             return HttpResponseRedirect(reverse('beers:beer_detail',
                                                 args=(beer.pk,)))
@@ -49,14 +59,44 @@ def beer_new(request):
 
 def beer_edit(request, pk):
     beer = get_object_or_404(Beer, pk=pk)
+    list_recipe = Recipe.objects.filter(beer=pk)
     if request.method == "POST":
         form = BeerForm(request.POST, instance=beer)
         if form.is_valid():
-            beer = form.save(commit=False)
-#            beer.author = request.user
-            beer.save()
+            beer = form.save()
             return HttpResponseRedirect(reverse('beers:beer_detail',
-                                                args=(beer.pk,)))
+                                                args=(beer.pk, list_recipe)))
     else:
         form = BeerForm(instance=beer)
-    return render(request, 'beers/beer_edit.html', {'form': form})
+    return render(request, 'beers/beer_edit.html', {'form': form,
+                                                    'list_recipe': list_recipe})
+
+
+def recipe_new(request, pk):
+    if request.method == "POST":
+        form = RecipeForm(request.POST)
+        beer = get_object_or_404(Beer, pk=pk)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.beer = beer
+            recipe.save()
+            return HttpResponseRedirect(reverse('beers:recipe_detail',
+                                                args=(recipe.pk,)))
+    else:
+        form = RecipeForm()
+    return render_to_response('beers/recipe_edit.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
+
+
+def recipe_edit(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    if request.method == "POST":
+        form = RecipeForm(request.POST, instance=recipe)
+        if form.is_valid():
+            recipe = form.save()
+            return HttpResponseRedirect(reverse('beers:recipe_detail',
+                                                args=(recipe.pk,)))
+    else:
+        form = RecipeForm(instance=recipe)
+    return render(request, 'beers/recipe_edit.html', {'form': form})

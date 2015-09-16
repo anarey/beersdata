@@ -14,7 +14,9 @@
 <li>IBU: {{beer.ibu }} </li>
 </ul>
 
-<h2>Recipe:</h2>
+<h2>Recipe:
+<a class="btn btn-default" href="{% url "beers:recipe_new" pk=beer.pk %}"><span class="glyphicon glyphicon-plus"></span></a>
+</h2>
 <ul>
 {% for recipe in beer.recipe_set.all %}
     <li>{{ recipe}}</li>

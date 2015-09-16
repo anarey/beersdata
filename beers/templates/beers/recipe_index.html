@@ -1,0 +1,18 @@
+{% extends "beers/base.html" %}
+
+{% block title %}Historial de cantidades de ingredientes de las cervezas{% endblock %}
+
+{% block content %}
+<h1>Listado de cantidades de ingredientes</h1>
+
+{% if recipe_list %}
+    <ul>
+    {% for recipe in recipe_list %}
+        <li><a href="{% url 'beers:recipe_detail' recipe.id %}">{{ recipe }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No recipe are available.</p>
+{% endif %}
+
+{% endblock %}

@@ -4,6 +4,22 @@
     <h1>New Beer</h1>
     <form method="POST" class="beer-form">{% csrf_token %}
         {{ form.as_p }}
+	{% if list_recipe %}
+	    <ul>
+	    {% for recipe in list_recipe %}
+
+		<li>{{ recipe }}
+                    <a href="{% url 'beers:recipe_edit' recipe.id %}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+               </li>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p> No recipe are avialable.</p>
+	{% endif %}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
+
+
 {% endblock %}

@@ -30,3 +30,6 @@ class Recipe(models.Model):
 
     def __str__(self):
         return (self.ingredient.name + ": " + str(self.quantity)) + " gr"
+
+    def more_info(self):
+        return ("[" +self.beer.beer_name + "] " + self.ingredient.name + ": " + str(self.quantity)) + " gr"
