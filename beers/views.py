@@ -71,9 +71,9 @@ def beer_edit(request, pk):
 
 
 def recipe_new(request, pk):
+    beer = get_object_or_404(Beer, pk=pk)
     if request.method == "POST":
         form = RecipeForm(request.POST)
-        beer = get_object_or_404(Beer, pk=pk)
         if form.is_valid():
             recipe = form.save(commit=False)
             recipe.beer = beer
@@ -82,7 +82,7 @@ def recipe_new(request, pk):
                                                 args=(recipe.pk,)))
     else:
         form = RecipeForm()
-    return render(request, 'beers/recipe_edit.html', {'form': form})
+    return render(request, 'beers/recipe_edit.html', {'form': form, 'beer': beer})
 
 
 def recipe_edit(request, pk):

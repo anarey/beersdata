@@ -1,7 +1,7 @@
 {% extends "beers/base.html" %}
 
 {% block content %}
-    <h1>Nuevo ingrediente para la receta. </h1>
+    <h1>Nuevo ingrediente para la receta de la cerveza {{ beer.beer_name  }}. </h1>
     <form method="POST" class="beer-form">{% csrf_token %}
         <ul>
             <li>Ingrediente: {{ form.ingredient }}</li>
