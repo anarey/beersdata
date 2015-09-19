@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from models import Recipe, Ingredient, Beer
+from models import Recipe, Ingredient, Beer, Purchase
 
 class RecipeInLine(admin.TabularInline):
     model = Recipe
@@ -32,6 +32,9 @@ class IngredientAdmin(admin.ModelAdmin):
     list_filter = ['type_ingredient' ]
     list_display = ('name', 'type_ingredient')
 
+class PurchaseAdmin(admin.ModelAdmin):
+    list_filter = ['ingredient' ]
+
 admin.site.register(Beer, BeerAdmin)
 admin.site.register(Ingredient, IngredientAdmin)
-
+admin.site.register(Purchase, PurchaseAdmin)
