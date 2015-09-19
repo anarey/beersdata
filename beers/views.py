@@ -5,8 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.shortcuts import render
 
-from .models import Beer, Ingredient, Recipe
-from .forms import BeerForm, RecipeForm, IngredientForm
+from .models import Beer, Ingredient, Recipe, Purchase
+from .forms import BeerForm, RecipeForm, IngredientForm, PurchaseForm
 
 class BeerIndexView(generic.ListView):
     template_name = 'beers/beer_index.html'
@@ -134,3 +134,53 @@ def ingredient_edit(request, pk):
     else:
         form = IngredientForm(instance=ingredient)
     return render(request, 'beers/ingredient_edit.html', {'form': form})
+
+## Compras:
+class PurchaseDetailView(generic.DetailView):
+    model = Purchase
+    template_name = 'beers/purchase_detail.html'
+
+class PurchaseIndexView(generic.ListView):
+    template_name = 'beers/purchase_index.html'
+    context_object_name = 'purchase_list'
+
+    def get_queryset(self):
+        """Return all Purchase."""
+        return Purchase.objects.order_by('buying_date').order_by('-ingredient')
+
+def purchase_edit(request, pk):
+    purchase = get_object_or_404(Purchase, pk=pk)
+    if request.method == "POST":
+        form = PurchaseForm(request.POST, instance=beer)
+        if form.is_valid():
+            purchase = form.save()
+            return HttpResponseRedirect(reverse('beers:purchase_detail',
+                                                args=(purchase.pk)))
+    else:
+        form = PurchaseForm(instance=beer)
+    return render(request, 'beers/purchase_edit.html', {'form': form})
+
+
+def purchase_new(request):
+    if request.method == "POST":
+        form = PurchaseForm(request.POST)
+        if form.is_valid():
+            purchase = form.save()
+            return HttpResponseRedirect(reverse('beers:purchase_detail',
+                                                args=(purchase.pk,)))
+    else:
+        form = PurchaseForm()
+    return render(request, 'beers/purchase_edit.html', {'form': form})
+
+
+def purchase_edit(request, pk):
+    purchase = get_object_or_404(Purchase, pk=pk)
+    if request.method == "POST":
+        form = PurchaseForm(request.POST, instance=purchase)
+        if form.is_valid():
+            purchase = form.save(commit=false)
+            return HttpResponseRedirect(reverse('beers:purchase_detail',
+                                                args=(purchase.pk,)))
+    else:
+        form = PurchaseForm(instance=purchase)
+    return render(request, 'beers/purchase_edit.html', {'form': form})

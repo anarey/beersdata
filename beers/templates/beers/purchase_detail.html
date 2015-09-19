@@ -1,0 +1,16 @@
+{% extends "beers/base.html" %}
+
+{% block title %} Información de la compra del ingrediente {{ purchase.ingrediente }} {% endblock %}
+{% block content %}
+
+<h1> Información de la compra del ingrediente {{ purchase.ingredient }}.</h1>
+
+<ul>
+    <li>Ingrediente: {{ purchase.ingredient }}</li>
+    <li>Cantidad: {{ purchase.quantity }}</li>
+    <li>Fecha de compra: {{ purchase.buying_date }}</li>
+    <li>Fecha de caducidad: {{ purchase.sell_by_date }}</li>
+    <li>Finalizado: {{ purchase.finished }}
+</ul>
+
+{% endblock %}

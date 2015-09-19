@@ -1,0 +1,19 @@
+{% extends "beers/base.html" %}
+
+{% block content %}
+    <h1>Nueva compra: </h1>
+    <form method="POST" class="beer-form">{% csrf_token %}
+        <ul>
+            <li>Ingrediente: {{ form.ingredient }} ó Añadir nuevo ingrediente:
+                <a href="{% url 'beers:ingredient_new' %}" class="top-menu">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </li>
+            <li>Cantidad: {{ form.quantity }}</li>
+            <li>Fecha de compra: {{ form.buying_date }}</li>
+            <li>Fecha de caducidad: {{ form.sell_by_date }}</li>
+            <li>Finalizado: {{form.finished }}
+        </ul>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

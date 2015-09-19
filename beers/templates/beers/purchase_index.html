@@ -1,0 +1,22 @@
+{% extends "beers/base.html" %}
+
+{% block title %}Historial de compras de ingredientes.{% endblock %}
+
+{% block content %}
+<h1>Historial de compras de ingredientes:
+    <a href="{% url 'beers:purchase_new' %}" class="top-menu">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
+</h1>
+
+{% if purchase_list %}
+    <ul>
+    {% for purchase in purchase_list %}
+        <li><a href="{% url 'beers:purchase_detail' purchase.id %}">{{ purchase }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No purchase are available.</p>
+{% endif %}
+
+{% endblock %}

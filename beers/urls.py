@@ -17,4 +17,10 @@ urlpatterns = [
     url(r'^recipe/$', views.RecipeIndexView.as_view(), name='recipe_index'),
     url(r'^recipe/(?P<pk>[0-9]+)/$', views.RecipeDetailView.as_view(), name='recipe_detail'),
     url(r'^recipe/(?P<pk>[0-9]+)/edit/$', views.recipe_edit, name='recipe_edit'),
+
+    url(r'^purchase/$', views.PurchaseIndexView.as_view(), name='purchase_index'),
+    url(r'^purchase/(?P<pk>[0-9]+)/$', views.PurchaseDetailView.as_view(), name='purchase_detail'),
+    url(r'^purchase/(?P<pk>[0-9]+)/edit/$', views.purchase_edit, name='purchase_edit'),
+    url(r'^purchase/new/$', views.purchase_new, name='purchase_new'),
+
 ]
