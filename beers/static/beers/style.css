@@ -21,3 +21,8 @@ li a {
 .page-header a {
     color: white;
 }
+
+.page-header li {
+    display:inline;
+    padding: 10px 10px;
+}
