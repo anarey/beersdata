@@ -6,11 +6,11 @@
 <h1> Información de la compra del ingrediente {{ purchase.ingredient }}.</h1>
 
 <ul>
-    <li>Ingrediente: {{ purchase.ingredient }}</li>
-    <li>Cantidad: {{ purchase.quantity }}</li>
-    <li>Fecha de compra: {{ purchase.buying_date }}</li>
-    <li>Fecha de caducidad: {{ purchase.sell_by_date }}</li>
-    <li>Finalizado: {{ purchase.finished }}
+    <li><strong>Ingrediente:</strong> {{ purchase.ingredient }}</li>
+    <li><strong> Cantidad: </strong>{{ purchase.quantity }} gramo{{ purchase.quantity|pluralize }}.</li>
+    <li><strong> Fecha de compra: </strong> {{ purchase.buying_date|date:"SHORT_DATE_FORMAT" }}</li>
+    <li><strong> Fecha de caducidad: </strong>{{ purchase.sell_by_date|date:"SHORT_DATE_FORMAT" }}</li>
+    <li><strong> Existencias:</strong> {{ purchase.finished|yesno:"Sin existencias, Con recursos" }}</li>
 </ul>
 
 {% endblock %}

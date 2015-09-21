@@ -5,6 +5,24 @@
 
 <h1> Detalles del ingrediente {{ingredient.name }} </h1>
 
-{{ingredient }}
+<ul>
+<li> <strong>Nombre: </strong> {{ingredient.name }} </li>
+<li> <strong>Tipo de ingrediente: </strong> {{ingredient.get_type_ingredient_display }}</li>
+<li> <strong>Compras realizadas:</strong>
+{% if buying_list %}
+    <ul>
+        {% for element in buying_list %}
+            <li><strong> Cantidas: </strong>{{ element.quantity }}.
+                <strong> Fecha de compra: </strong> {{ element.buying_date|date:"SHORT_DATE_FORMAT" }}
+                <strong> Fecha de caducidad: </strong>{{ element.sell_by_date|date:"SHORT_DATE_FORMAT" }}
+                <strong> Existencias:</strong> {{ element.finished|yesno:"Sin existencias, Con recursos" }}
+
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No purchase are available.</p>
+{% endif %}
+</li></ul>
 
 {% endblock %}

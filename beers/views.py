@@ -26,7 +26,7 @@ class IngredientDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(IngredientDetailView, self).get_context_data(**kwargs)
-        buying_list = Purchase.objects.filter(pk=pk).order_by('buying_data')
+        buying_list = Purchase.objects.filter(ingredient=self.kwargs['pk']).order_by('buying_date')
         context['buying_list'] = buying_list
         return context
 
