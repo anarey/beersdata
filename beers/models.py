@@ -40,7 +40,14 @@ class Purchase(models.Model):
     price = models.IntegerField(default = 0)
     buying_date = models.DateField('Date buying')
     sell_by_date = models.DateField('Date sell-by')
-    finished = models.BooleanField(default = False)
+    finished = models.IntegerField(default = 0)
 
     def __str__(self):
         return (self.ingredient.name + ": " + str(self.quantity)) + " gr"
+
+    def is_there_existence(self):
+        return (self.quantity > self.finished)
+
+    def existence(self):
+        existence = (self.quantity - self.finished)
+        return existence if existence > 0 else -1

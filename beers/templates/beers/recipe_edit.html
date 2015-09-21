@@ -2,6 +2,12 @@
 
 {% block content %}
     <h1>Nuevo ingrediente para la receta de la cerveza {{ beer.beer_name  }}. </h1>
+    {% if error %}
+        <p style="color: red;">
+            Please correct this error: {{ error }}.
+        </p>
+    {% endif %}
+
     <form method="POST" class="beer-form">{% csrf_token %}
         <ul>
             <li>Ingrediente: {{ form.ingredient }}</li>
