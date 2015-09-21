@@ -37,6 +37,7 @@ class Recipe(models.Model):
 class Purchase(models.Model):
     ingredient = models.ForeignKey(Ingredient)
     quantity = models.IntegerField(default = 0)
+    price = models.IntegerField(default = 0)
     buying_date = models.DateField('Date buying')
     sell_by_date = models.DateField('Date sell-by')
     finished = models.BooleanField(default = False)

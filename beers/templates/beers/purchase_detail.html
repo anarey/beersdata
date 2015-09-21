@@ -8,6 +8,7 @@
 <ul>
     <li><strong>Ingrediente:</strong> {{ purchase.ingredient }}</li>
     <li><strong> Cantidad: </strong>{{ purchase.quantity }} gramo{{ purchase.quantity|pluralize }}.</li>
+    <li><strong> Precio: </strong>{{ purchase.price }} Euro{{ purchase.price|pluralize }}.</li>
     <li><strong> Fecha de compra: </strong> {{ purchase.buying_date|date:"SHORT_DATE_FORMAT" }}</li>
     <li><strong> Fecha de caducidad: </strong>{{ purchase.sell_by_date|date:"SHORT_DATE_FORMAT" }}</li>
     <li><strong> Existencias:</strong> {{ purchase.finished|yesno:"Sin existencias, Con recursos" }}</li>
