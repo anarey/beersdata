@@ -101,3 +101,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# enable number formatting with thousand separators
+# https://docs.djangoproject.com/en/1.8/topics/i18n/formatting/
+
+USE_THOUSAND_SEPARATOR = True

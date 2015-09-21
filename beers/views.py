@@ -24,6 +24,13 @@ class IngredientDetailView(generic.DetailView):
     model = Ingredient
     template_name = 'beers/ingredient_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(IngredientDetailView, self).get_context_data(**kwargs)
+        buying_list = Purchase.objects.filter(pk=pk).order_by('buying_data')
+        context['buying_list'] = buying_list
+        return context
+
+
 class IngredientIndexView(generic.ListView):
     template_name = 'beers/ingredient_index.html'
     context_object_name = 'ingredient_list'
