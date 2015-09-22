@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^purchase/(?P<pk>[0-9]+)/edit/$', views.purchase_edit, name='purchase_edit'),
     url(r'^purchase/new/$', views.purchase_new, name='purchase_new'),
 
+    url(r'^calculator/$', views.litre_calculator, name='calculator'),
 ]

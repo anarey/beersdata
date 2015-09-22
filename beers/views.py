@@ -6,7 +6,7 @@ from django.views import generic
 from django.shortcuts import render
 
 from .models import Beer, Ingredient, Recipe, Purchase
-from .forms import BeerForm, RecipeForm, IngredientForm, PurchaseForm
+from .forms import BeerForm, RecipeForm, IngredientForm, PurchaseForm, LitreCalculatorForm
 
 class BeerIndexView(generic.ListView):
     template_name = 'beers/beer_index.html'
@@ -246,3 +246,21 @@ def purchase_edit(request, pk):
     else:
         form = PurchaseForm(instance=purchase)
     return render(request, 'beers/purchase_edit.html', {'form': form})
+
+
+def litre_calculator(request):
+    if request.method == "POST":
+        form = LitreCalculatorForm(request.POST)
+        if form.is_valid():
+            size_330 = form.cleaned_data['size_330']
+            size_500 = form.cleaned_data['size_500']
+            size_700 = form.cleaned_data['size_700']
+            size_1000 = form.cleaned_data['size_1000']
+            litre = (0.330 * size_330 + 0.5 * size_500 + 0.7 * size_700 + \
+                1 * size_1000)
+        return render(request, 'beers/calculator.html', {'form': form,
+                                                         'litre': litre})
+
+    else:
+        form = LitreCalculatorForm()
+    return render(request, 'beers/calculator.html', {'form': form})

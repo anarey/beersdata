@@ -25,3 +25,10 @@ class PurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
         fields = '__all__'
+
+
+class LitreCalculatorForm(forms.Form):
+    size_330 = forms.IntegerField(min_value = 0, initial = 0)
+    size_500 = forms.IntegerField(min_value = 0, initial = 0)
+    size_700 = forms.IntegerField(min_value = 0, initial = 0)
+    size_1000 = forms.IntegerField(min_value = 0, initial = 0)

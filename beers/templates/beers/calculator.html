@@ -1,0 +1,19 @@
+{% extends 'beers/base.html' %}
+{% block title %} Litre Calculator {% endblock %}
+{% block content %}
+
+<form method="POST" action=".">
+    {% csrf_token %}
+    <ul>
+        <li><strong>Botellines de 0,33 l :</strong> {{ form.size_330 }}</li>
+        <li><strong>Botellines de 0,50 l :</strong> {{ form.size_500 }}</li>
+        <li><strong>Botellines de 0,70 l :</strong> {{ form.size_700 }}</li>
+        <li><strong>Botellines de 1 l :</strong> {{ form.size_1000 }}</li>
+        {% if litre %}
+            <li>Total: <strong>{{ litre }} litros</strong></li>
+        {% endif %}
+   </ul>
+    <p><button type="submit" class="save btn btn-default">Calculate</button></p>
+</form>
+
+{% endblock %}
