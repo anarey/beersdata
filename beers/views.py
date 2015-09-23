@@ -264,3 +264,20 @@ def litre_calculator(request):
     else:
         form = LitreCalculatorForm()
     return render(request, 'beers/calculator.html', {'form': form})
+
+
+def ingredient_stock(request):
+    stock = {}
+    no_stock = {}
+    list_ingredient = Ingredient.objects.all()
+    for ingredient in list_ingredient:
+        list_purchase = Purchase.objects.filter(ingredient = ingredient)
+        ingredient_stock = 0
+        for purchase in list_purchase:
+            ingredient_stock = ingredient_stock + purchase.existence()
+        if ingredient_stock > 0:
+            stock[ingredient] = ingredient_stock
+        else:
+            no_stock[ingredient] = 0
+    return render(request,   'beers/ingredient_stock.html',
+                  {'stock':stock, 'no_stock':no_stock })

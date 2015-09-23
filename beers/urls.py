@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^ingredient/new/$', views.ingredient_new, name='ingredient_new'),
     url(r'^ingredient/(?P<pk>[0-9]+)/edit/$', views.ingredient_edit, name='ingredient_edit'),
 
+    url(r'^ingredient/stock/$', views.ingredient_stock, name='ingredient_stock'),
+
     url(r'^recipe/$', views.RecipeIndexView.as_view(), name='recipe_index'),
     url(r'^recipe/(?P<pk>[0-9]+)/$', views.RecipeDetailView.as_view(), name='recipe_detail'),
     url(r'^recipe/(?P<pk>[0-9]+)/edit/$', views.recipe_edit, name='recipe_edit'),
