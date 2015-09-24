@@ -16,7 +16,7 @@
                 <strong> Precio: </strong> {{ element.price }} Euro {{element.priece|pluralize}}.
                 <strong> Fecha de compra: </strong> {{ element.buying_date|date:"SHORT_DATE_FORMAT" }}.
                 <strong> Fecha de caducidad: </strong>{{ element.sell_by_date|date:"SHORT_DATE_FORMAT" }}.
-                <strong> Existencias:</strong> {{ element.finished|yesno:"Sin existencias, Con recursos" }}.
+                <strong> Existencias:</strong> {{ element.is_there_existence|yesno:"Con recursos, Sin existencias" }} (queda {{ element.existence }} gramo{{element.existence|pluralize}})
 
             </li>
         {% endfor %}
