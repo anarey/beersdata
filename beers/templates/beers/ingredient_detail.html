@@ -5,6 +5,7 @@
 
 <h1> Detalles del ingrediente {{ingredient.name }} </h1>
 
+<h2>Información principal: </h2>
 <ul>
 <li> <strong>Nombre: </strong> {{ingredient.name }} </li>
 <li> <strong>Tipo de ingrediente: </strong> {{ingredient.get_type_ingredient_display }}</li>
@@ -23,6 +24,19 @@
     </ul>
 {% else %}
     <p>No purchase are available.</p>
+{% endif %}
+</ul>
+
+{% if stats %}
+<h2>Estamos usando '{{ ingredient.name }}' en las siguientes cervezas:</h2>
+<ul>
+    {% for beer, quantity in stats.items %}
+        <li>{{ beer }}: {{ quantity }} gramo{{quantity|pluralize }}</li>
+    {% endfor %}
+</ul>
+{% endif%}
+{% if stock %}
+Stock: {{ stock }} gramo{{ stock|pluralize }}
 {% endif %}
 </li></ul>
 

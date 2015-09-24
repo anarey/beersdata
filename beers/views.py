@@ -20,14 +20,40 @@ class BeerDetailView(generic.DetailView):
     model = Beer
     template_name = 'beers/beer_detail.html'
 
+
+def ingredient_stats(self, ingredient):
+    get_object_or_404(Ingredient, pk= ingredient)
+    recipe_list = Recipe.objects.filter(ingredient = ingredient)
+
+    stats = {}
+    for recipe in recipe_list:
+        stats[recipe.beer] = recipe.quantity
+
+    return stats
+
+
+def stock(self, ingredient):
+    get_object_or_404(Ingredient, pk=ingredient)
+    list_purchase = Purchase.objects.filter(ingredient = ingredient)
+
+    stock = 0
+    for purchase in list_purchase:
+        stock = stock + purchase.existence()
+
+    return stock
+
+
 class IngredientDetailView(generic.DetailView):
     model = Ingredient
     template_name = 'beers/ingredient_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(IngredientDetailView, self).get_context_data(**kwargs)
-        buying_list = Purchase.objects.filter(ingredient=self.kwargs['pk']).order_by('buying_date')
+        pk = self.kwargs['pk']
+        buying_list = Purchase.objects.filter(ingredient=pk).order_by('buying_date')
         context['buying_list'] = buying_list
+        context['stats'] = ingredient_stats(self, pk)
+        context['stock'] = stock(self, pk)
         return context
 
 
